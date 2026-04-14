@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zagarsix | Bring ideas to life</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg-primary: #050a12;
+      --bg-secondary: #0a1525;
+      --bg-card: rgba(10, 20, 40, 0.7);
+      --neon-cyan: #00f5ff;
+      --neon-blue: #0066ff;
+      --neon-purple: #8b5cf6;
+      --neon-pink: #ff006e;
+      --neon-green: #00ff88;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-dim: #475569;
+      --border-glow: rgba(0, 245, 255, 0.3);
+      --glass: rgba(10, 25, 50, 0.6);
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0f4ff;
+      --bg-secondary: #e2e8f7;
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --neon-cyan: #0066cc;
+      --neon-blue: #0044aa;
+      --neon-purple: #7c3aed;
+      --neon-pink: #db0060;
+      --neon-green: #007744;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-dim: #64748b;
+      --border-glow: rgba(0, 102, 204, 0.3);
+      --glass: rgba(240, 244, 255, 0.85);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    /* BACKGROUND GRID */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    [data-theme="light"] body::before {
+      background-image:
+        linear-gradient(rgba(0, 102, 204, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 102, 204, 0.06) 1px, transparent 1px);
+    }
+
+    /* ========== NAVBAR ========== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(5, 10, 18, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-glow);
+      padding: 0 2rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, border-color 0.4s;
+    }
+
+    [data-theme="light"] nav {
+      background: rgba(240, 244, 255, 0.9);
+    }
+
+    .nav-logo {
+      font-family: 'Orbitron', monospace;
+      font-weight: 900;
+      font-size: 1.4rem;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+      letter-spacing: 2px;
+      transition: filter var(--transition);
+      text-decoration: none;
+    }
+
+    .nav-logo:hover {
+      filter: brightness(1.3) drop-shadow(0 0 8px var(--neon-cyan));
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 0.1rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      padding: 0.4rem 0.7rem;
+      border-radius: 4px;
+      transition: color var(--transition), background var(--transition);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--neon-cyan);
+      background: rgba(0, 245, 255, 0.07);
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: 0.75rem;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid var(--border-glow);
+      color: var(--text-secondary);
+      border-radius: 6px;
+      padding: 0.35rem 0.65rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+    }
+
+    .nav-btn.icon-btn {
+      padding: 0.35rem 0.55rem;
+      font-size: 1rem;
+    }
+
+    .chatbot-btn {
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      border: none;
+      color: white;
+      border-radius: 6px;
+      padding: 0.4rem 0.9rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all var(--transition);
+    }
+
+    .chatbot-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.5);
+    }
+
+    /* HAMBURGER */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-secondary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: rgba(5, 10, 18, 0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-glow);
+      padding: 1.5rem;
+      z-index: 999;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    [data-theme="light"] .mobile-menu {
+      background: rgba(240, 244, 255, 0.97);
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      padding: 0.6rem 0.5rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      transition: color var(--transition);
+    }
+
+    .mobile-menu a:hover {
+      color: var(--neon-cyan);
+    }
+
+    .mobile-controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* ========== SECTIONS ========== */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 2rem 4rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* FADE IN ON SCROLL */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== SECTION TITLES ========== */
+    .section-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+    }
+
+    .section-line {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+      border-radius: 2px;
+      margin-bottom: 3rem;
+      box-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    /* ========== HOME ========== */
+    #home {
+      display: flex;
+      align-items: center;
+      padding-top: 70px;
+      min-height: 100vh;
+    }
+
+    .home-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .home-text h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff, var(--neon-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .home-text .role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      color: var(--neon-cyan);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .role::before {
+      content: '> ';
+      color: var(--neon-purple);
+    }
+
+    .cursor-blink {
+      display: inline-block;
+      width: 10px;
+      height: 1.1em;
+      background: var(--neon-cyan);
+      animation: blink 1s step-end infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .home-text p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .home-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+      color: #000;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      padding: 0.7rem 1.8rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all var(--transition);
+      text-transform: uppercase;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(0, 245, 255, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--neon-cyan);
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      padding: 0.68rem 1.8rem;
+      border: 1px solid var(--neon-cyan);
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all var(--transition);
+      text-transform: uppercase;
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 245, 255, 0.1);
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .home-image-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .photo-frame {
+      position: relative;
+      width: 280px;
+      height: 280px;
+    }
+
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+      animation: spin 6s linear infinite;
+      z-index: 0;
+    }
+
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      z-index: 1;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .photo-placeholder {
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--bg-secondary), #0d2040);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      font-size: 4rem;
+      overflow: hidden;
+    }
+
+    .photo-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .photo-placeholder .placeholder-icon {
+      font-size: 4rem;
+      color: var(--neon-cyan);
+      opacity: 0.5;
+    }
+
+    .photo-placeholder .placeholder-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-top: 0.5rem;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed rgba(0, 245, 255, 0.15);
+      animation: counter-spin 10s linear infinite;
+    }
+
+    .orbit-ring.r1 {
+      inset: -30px;
+    }
+
+    .orbit-ring.r2 {
+      inset: -55px;
+      animation-duration: 15s;
+      border-color: rgba(139, 92, 246, 0.1);
+    }
+
+    @keyframes counter-spin {
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+
+    .orbit-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--neon-cyan);
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(-4px);
+      box-shadow: 0 0 8px var(--neon-cyan);
+    }
+
+    /* ========== SOBRE MÍ ========== */
+    #sobre-mi {
+      background: var(--bg-secondary);
+    }
+
+    .sobre-content {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .family-photo-wrap {
+      position: relative;
+    }
+
+    .family-photo {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--bg-secondary), #0d2040);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-glow);
+      box-shadow: 0 0 30px rgba(0, 245, 255, 0.1);
+      overflow: hidden;
+      transition: box-shadow var(--transition);
+    }
+
+    .family-photo:hover {
+      box-shadow: 0 0 50px rgba(0, 245, 255, 0.2);
+    }
+
+    .family-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .family-photo .placeholder-icon {
+      font-size: 3.5rem;
+      color: var(--neon-purple);
+      opacity: 0.4;
+    }
+
+    .family-photo .placeholder-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-top: 0.5rem;
+    }
+
+    .corner-tag {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(139, 92, 246, 0.8);
+      color: white;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    .sobre-text h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      color: var(--neon-cyan);
+      margin-bottom: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .sobre-text h3:first-child {
+      margin-top: 0;
+    }
+
+    .sobre-text p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      font-size: 1.02rem;
+    }
+
+    .hobbies-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .hobby-tag {
+      background: rgba(0, 245, 255, 0.08);
+      border: 1px solid rgba(0, 245, 255, 0.2);
+      color: var(--neon-cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      transition: all var(--transition);
+    }
+
+    .hobby-tag:hover {
+      background: rgba(0, 245, 255, 0.15);
+      box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+    }
+
+    .cv-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+      color: white;
+      text-decoration: none;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 6px;
+      transition: all var(--transition);
+      text-transform: uppercase;
+      margin-top: 1rem;
+    }
+
+    .cv-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(139, 92, 246, 0.4);
+    }
+
+    /* ========== LENGUAJES ========== */
+    .tech-category {
+      margin-bottom: 3rem;
+    }
+
+    .tech-category h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--neon-cyan);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .tech-category h3::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-glow), transparent);
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1rem;
+    }
+
+    .tech-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0, 245, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.2rem 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: default;
+      transition: all var(--transition);
+      backdrop-filter: blur(10px);
+    }
+
+    .tech-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 8px 30px rgba(0, 245, 255, 0.15), 0 0 20px rgba(0, 245, 255, 0.08);
+    }
+
+    .tech-card i,
+    .tech-card .tech-icon {
+      font-size: 2rem;
+      transition: filter var(--transition);
+    }
+
+    .tech-card:hover i {
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+
+    .tech-card span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    /* Tech icon colors */
+    .ic-js {
+      color: #f7df1e;
+    }
+
+    .ic-react {
+      color: #61dafb;
+    }
+
+    .ic-html {
+      color: #e34f26;
+    }
+
+    .ic-css {
+      color: #1572b6;
+    }
+
+    .ic-bootstrap {
+      color: #7952b3;
+    }
+
+    .ic-python {
+      color: #3776ab;
+    }
+
+    .ic-flask {
+      color: #888;
+    }
+
+    .ic-mysql {
+      color: #4479a1;
+    }
+
+    .ic-git {
+      color: #f05032;
+    }
+
+    .ic-github {
+      color: #aaa;
+    }
+
+    .ic-vscode {
+      color: #007acc;
+    }
+
+    .ic-figma {
+      color: #f24e1e;
+    }
+
+    .ic-npm {
+      color: #cb3837;
+    }
+
+    .ic-node {
+      color: #339933;
+    }
+
+    /* ========== PROYECTOS ========== */
+    #proyectos {
+      background: var(--bg-secondary);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0, 245, 255, 0.1);
+      border-radius: 16px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      backdrop-filter: blur(15px);
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 245, 255, 0.3);
+      box-shadow: 0 15px 40px rgba(0, 245, 255, 0.1), 0 0 30px rgba(139, 92, 246, 0.08);
+    }
+
+    .project-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .project-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--neon-purple);
+      letter-spacing: 2px;
+    }
+
+    .project-card h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      color: var(--text-primary);
+      letter-spacing: 1px;
+    }
+
+    .project-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .project-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      background: rgba(0, 245, 255, 0.07);
+      border: 1px solid rgba(0, 245, 255, 0.15);
+      color: var(--neon-cyan);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .proj-btn {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      padding: 0.55rem;
+      border-radius: 6px;
+      transition: all var(--transition);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .proj-btn.github {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-secondary);
+    }
+
+    .proj-btn.github:hover {
+      border-color: #aaa;
+      color: #eee;
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .proj-btn.demo {
+      background: linear-gradient(135deg, rgba(0, 245, 255, 0.15), rgba(139, 92, 246, 0.15));
+      border: 1px solid rgba(0, 245, 255, 0.3);
+      color: var(--neon-cyan);
+    }
+
+    .proj-btn.demo:hover {
+      background: linear-gradient(135deg, rgba(0, 245, 255, 0.25), rgba(139, 92, 246, 0.25));
+      box-shadow: 0 4px 15px rgba(0, 245, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* ========== CONTACTO ========== */
+    #contacto {
+      text-align: center;
+    }
+
+    .contact-desc {
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .social-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .social-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+
+    .social-icon .icon-wrap {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #555;
+      transition: all var(--transition);
+      backdrop-filter: blur(10px);
+    }
+
+    .social-icon span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      transition: color var(--transition);
+    }
+
+    .social-icon:hover .icon-wrap {
+      transform: translateY(-5px) scale(1.1);
+    }
+
+    .social-icon:hover span {
+      color: var(--text-secondary);
+    }
+
+    .social-icon.linkedin:hover .icon-wrap {
+      color: #0a66c2;
+      border-color: #0a66c2;
+      box-shadow: 0 8px 30px rgba(10, 102, 194, 0.4), 0 0 20px rgba(10, 102, 194, 0.2);
+    }
+
+    .social-icon.github-s:hover .icon-wrap {
+      color: #eee;
+      border-color: #eee;
+      box-shadow: 0 8px 30px rgba(238, 238, 238, 0.2);
+    }
+
+    .social-icon.whatsapp:hover .icon-wrap {
+      color: #25d366;
+      border-color: #25d366;
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 20px rgba(37, 211, 102, 0.2);
+    }
+
+    .social-icon.gmail:hover .icon-wrap {
+      color: #ea4335;
+      border-color: #ea4335;
+      box-shadow: 0 8px 30px rgba(234, 67, 53, 0.4), 0 0 20px rgba(234, 67, 53, 0.2);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-glow);
+      text-align: center;
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      position: relative;
+      z-index: 1;
+    }
+
+    footer span {
+      color: var(--neon-cyan);
+    }
+
+    /* ========== BACK TO TOP ========== */
+    #back-top {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      border: none;
+      border-radius: 50%;
+      color: #000;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(20px) scale(0.8);
+      transition: all var(--transition);
+      box-shadow: 0 4px 20px rgba(0, 245, 255, 0.3);
+      pointer-events: none;
+    }
+
+    #back-top.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+    }
+
+    #back-top:hover {
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
+    }
+
+    /* ========== CHATBOT ========== */
+    .chatbot-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1100;
+      backdrop-filter: blur(5px);
+      animation: fadeIn 0.2s ease;
+    }
+
+    .chatbot-overlay.open {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .chatbot-window {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-glow);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 520px;
+      height: 520px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 80px rgba(0, 245, 255, 0.15), 0 0 60px rgba(139, 92, 246, 0.1);
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chat-header {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--border-glow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .chat-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .chat-header-info h4 {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+    }
+
+    .chat-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--neon-green);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--neon-green);
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    .chat-close {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+
+    .chat-close:hover {
+      color: var(--neon-pink);
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--neon-cyan) transparent;
+    }
+
+    .msg {
+      max-width: 80%;
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      animation: msgIn 0.2s ease;
+    }
+
+    @keyframes msgIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+    }
+
+    .msg.bot {
+      background: rgba(0, 245, 255, 0.08);
+      border: 1px solid rgba(0, 245, 255, 0.15);
+      color: var(--text-primary);
+      align-self: flex-start;
+      border-radius: 4px 12px 12px 12px;
+    }
+
+    .msg.user {
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.3), rgba(139, 92, 246, 0.3));
+      color: var(--text-primary);
+      align-self: flex-end;
+      border-radius: 12px 12px 4px 12px;
+    }
+
+    .msg.loading {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 3px;
+    }
+
+    .chat-input-wrap {
+      padding: 1rem 1.2rem;
+      border-top: 1px solid var(--border-glow);
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-glow);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.95rem;
+      padding: 0.6rem 1rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .chat-input:focus {
+      border-color: var(--neon-cyan);
+    }
+
+    .chat-send {
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      width: 40px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-send:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 245, 255, 0.4);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      nav {
+        padding: 0 1rem;
+      }
+
+      .nav-links,
+      .nav-controls {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .home-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+      }
+
+      .home-image-wrap {
+        order: -1;
+      }
+
+      .photo-frame {
+        width: 220px;
+        height: 220px;
+      }
+
+      .home-ctas {
+        justify-content: center;
+      }
+
+      .sobre-content {
+        grid-template-columns: 1fr;
+      }
+
+      .family-photo-wrap {
+        max-width: 280px;
+        margin: 0 auto;
+      }
+
+      section {
+        padding: 5rem 1.5rem 3rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tech-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .social-grid {
+        gap: 1.2rem;
+      }
+
+      .social-icon .icon-wrap {
+        width: 55px;
+        height: 55px;
+        font-size: 1.4rem;
+      }
+
+      .chatbot-window {
+        height: 480px;
+      }
+    }
+
+    /* GLOW BLOBS */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 0;
+      animation: blobFloat 12s ease-in-out infinite;
+    }
+
+    .blob1 {
+      width: 400px;
+      height: 400px;
+      background: var(--neon-cyan);
+      top: -100px;
+      right: -100px;
+    }
+
+    .blob2 {
+      width: 300px;
+      height: 300px;
+      background: var(--neon-purple);
+      bottom: 200px;
+      left: -100px;
+      animation-delay: -4s;
+    }
+
+    .blob3 {
+      width: 250px;
+      height: 250px;
+      background: var(--neon-pink);
+      top: 50%;
+      right: 20%;
+      animation-delay: -8s;
+    }
+
+    @keyframes blobFloat {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(20px, -20px) scale(1.05);
+      }
+
+      66% {
+        transform: translate(-15px, 15px) scale(0.97);
+      }
+    }
+
+    [data-theme="light"] .blob {
+      opacity: 0.04;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- GLOW BLOBS -->
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav>
+    <a class="nav-logo" href="#home">ZAGARSIX</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#sobre-mi" data-i18n="nav_about">Sobre Mí</a></li>
+      <li><a href="#lenguajes" data-i18n="nav_skills">Lenguajes y Herramientas</a></li>
+      <li><a href="#proyectos" data-i18n="nav_projects">Proyectos</a></li>
+      <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="nav-btn" id="langBtn" onclick="toggleLang()">EN</button>
+      <button class="nav-btn icon-btn" id="themeBtn" onclick="toggleTheme()" title="Modo oscuro/claro">🌙</button>
+      <button class="chatbot-btn" onclick="openChat()">
+        <i class="fas fa-robot"></i> <span data-i18n="chat_btn">Chat</span>
+      </button>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#sobre-mi" onclick="closeMenu()" data-i18n="nav_about">Sobre Mí</a>
+    <a href="#lenguajes" onclick="closeMenu()" data-i18n="nav_skills">Lenguajes y Herramientas</a>
+    <a href="#proyectos" onclick="closeMenu()" data-i18n="nav_projects">Proyectos</a>
+    <a href="#contacto" onclick="closeMenu()" data-i18n="nav_contact">Contacto</a>
+    <div class="mobile-controls">
+      <button class="nav-btn" onclick="toggleLang()">EN / ES</button>
+      <button class="nav-btn icon-btn" onclick="toggleTheme()">🌙 / ☀️</button>
+      <button class="chatbot-btn" onclick="openChat(); closeMenu()">
+        <i class="fas fa-robot"></i> Chat
+      </button>
+    </div>
+  </div>
+
+  <!-- ========== HOME ========== -->
+  <section id="home">
+    <div class="home-content">
+      <div class="home-text fade-up">
+        <div class="role"><span data-i18n="home_role">Fullstack Web & Mobile Developer</span><span
+            class="cursor-blink"></span></div>
+        <h1 data-i18n="home_title">Hola, soy<br />Zagarsix</h1>
+        <p data-i18n="home_desc">
+          Mi historia con la programación comenzó de forma autodidacta, explorando tutoriales y construyendo pequeños
+          proyectos por curiosidad. Esa chispa creció hasta convertirse en una vocación. Elegí ser desarrollador
+          fullstack porque me apasiona entender el sistema completo: desde la interfaz que el usuario ve, hasta la
+          lógica y los datos que lo sostienen.
+        </p>
+        <div class="home-ctas">
+          <a href="#proyectos" class="btn-primary" data-i18n="home_cta1">Ver Proyectos</a>
+          <a href="#contacto" class="btn-outline" data-i18n="home_cta2">Contáctame</a>
+        </div>
+      </div>
+      <div class="home-image-wrap fade-up" style="transition-delay:0.2s">
+        <div class="photo-frame">
+          <div class="orbit-ring r1">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="orbit-ring r2"></div>
+          <div class="photo-placeholder">
+            <!-- Reemplaza con: <img src="tu-foto.jpg" alt="Foto de perfil"> -->
+            <i class="fas fa-user placeholder-icon"></i>
+            <span class="placeholder-text">// tu-foto.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SOBRE MÍ ========== -->
+  <section id="sobre-mi">
+    <div class="container">
+      <h2 class="section-title fade-up" data-i18n="nav_about">Sobre Mí</h2>
+      <div class="section-line fade-up"></div>
+      <div class="sobre-content">
+        <div class="family-photo-wrap fade-up">
+          <div class="family-photo">
+            <!-- Reemplaza con: <img src="foto-familia.jpg" alt="Mi familia"> -->
+            <i class="fas fa-users placeholder-icon"></i>
+            <span class="placeholder-text">// foto-familia.jpg</span>
+          </div>
+          <div class="corner-tag">familia.jpg</div>
+        </div>
+        <div class="sobre-text fade-up" style="transition-delay:0.15s">
+          <h3 data-i18n="about_tray_title">📁 Trayectoria Profesional</h3>
+          <p data-i18n="about_tray">
+            Con 2 años de experiencia en desarrollo fullstack, he trabajado construyendo aplicaciones web completas,
+            desde APIs REST con Flask y Python hasta interfaces modernas con React. Me especializo en crear soluciones
+            que combinan buena experiencia de usuario con arquitecturas de backend sólidas.
+          </p>
+          <h3 data-i18n="about_hobbies_title">🎮 Hobbies e Intereses</h3>
+          <p data-i18n="about_hobbies_desc">Cuando no estoy programando, me puedes encontrar en:</p>
+          <div class="hobbies-grid">
+            <span class="hobby-tag" data-i18n="hobby_tag1">🎮 Gaming</span>
+            <span class="hobby-tag" data-i18n="hobby_tag2">📚 Lectura Tech</span>
+            <span class="hobby-tag" data-i18n="hobby_tag3">🎵 Música</span>
+            <span class="hobby-tag" data-i18n="hobby_tag4">📖✝️ Teología</span>
+            <span class="hobby-tag" data-i18n="hobby_tag5">🥁 Batería</span>
+            <span class="hobby-tag" data-i18n="hobby_tag6">🏓 Tenis de mesa</span>
+          </div>
+          <p data-i18n="about_family">
+            La familia es mi motivación principal. Vivimos en Santiago y disfruto cada momento libre junto a los míos —
+            es lo que me da energía para seguir creciendo como profesional.
+          </p>
+          <a href="#" class="cv-link" download data-i18n="cv_btn">
+            <i class="fas fa-file-download"></i> Descargar CV
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LENGUAJES ========== -->
+  <section id="lenguajes">
+    <div class="container">
+      <h2 class="section-title fade-up" data-i18n="nav_skills">Lenguajes y Herramientas</h2>
+      <div class="section-line fade-up"></div>
+
+      <div class="tech-category fade-up">
+        <h3 data-i18n="tech_frontend">Frontend</h3>
+        <div class="tech-grid">
+          <div class="tech-card"><i class="fab fa-html5 ic-html"></i><span>HTML5</span></div>
+          <div class="tech-card"><i class="fab fa-css3-alt ic-css"></i><span>CSS3</span></div>
+          <div class="tech-card"><i class="fab fa-js ic-js"></i><span>JavaScript</span></div>
+          <div class="tech-card"><i class="fab fa-react ic-react"></i><span>React</span></div>
+          <div class="tech-card"><i class="fab fa-bootstrap ic-bootstrap"></i><span>Bootstrap</span></div>
+        </div>
+      </div>
+
+      <div class="tech-category fade-up" style="transition-delay:0.1s">
+        <h3 data-i18n="tech_backend">Backend</h3>
+        <div class="tech-grid">
+          <div class="tech-card"><i class="fab fa-python ic-python"></i><span>Python</span></div>
+          <div class="tech-card" style="color:#888"><i class="fas fa-flask ic-flask"></i><span>Flask</span></div>
+          <div class="tech-card"><i class="fab fa-node-js ic-node"></i><span>Node.js</span></div>
+        </div>
+      </div>
+
+      <div class="tech-category fade-up" style="transition-delay:0.2s">
+        <h3 data-i18n="tech_db">Base de Datos</h3>
+        <div class="tech-grid">
+          <div class="tech-card"><i class="fas fa-database ic-mysql"></i><span>MySQL</span></div>
+        </div>
+      </div>
+
+      <div class="tech-category fade-up" style="transition-delay:0.3s">
+        <h3 data-i18n="tech_tools">Herramientas</h3>
+        <div class="tech-grid">
+          <div class="tech-card"><i class="fab fa-git-alt ic-git"></i><span>Git</span></div>
+          <div class="tech-card"><i class="fab fa-github ic-github"></i><span>GitHub</span></div>
+          <div class="tech-card"><i class="fas fa-code ic-vscode"></i><span>VS Code</span></div>
+          <div class="tech-card"><i class="fab fa-npm ic-npm"></i><span>npm</span></div>
+          <div class="tech-card"><i class="fab fa-figma ic-figma"></i><span>Figma</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROYECTOS ========== -->
+  <section id="proyectos">
+    <div class="container">
+      <h2 class="section-title fade-up" data-i18n="nav_projects">Proyectos</h2>
+      <div class="section-line fade-up"></div>
+      <div class="projects-grid">
+
+        <div class="project-card fade-up">
+          <div class="project-num">// PROJECT_01</div>
+          <h3 data-i18n="p1_title">E-Commerce App</h3>
+          <p data-i18n="p1_desc">Plataforma de comercio electrónico con carrito de compras, autenticación de usuarios y
+            panel de administración. Construida con React, Flask y MySQL.</p>
+          <div class="project-tags">
+            <span class="project-tag">React</span>
+            <span class="project-tag">Flask</span>
+            <span class="project-tag">MySQL</span>
+            <span class="project-tag">Bootstrap</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/zagarsix" target="_blank" class="proj-btn github"><i class="fab fa-github"></i>
+              Repo</a>
+            <a href="#" target="_blank" class="proj-btn demo"><i class="fas fa-external-link-alt"></i> Demo</a>
+          </div>
+        </div>
+
+        <div class="project-card fade-up" style="transition-delay:0.1s">
+          <div class="project-num">// PROJECT_02</div>
+          <h3 data-i18n="p2_title">Task Manager API</h3>
+          <p data-i18n="p2_desc">API RESTful para gestión de tareas y proyectos con autenticación JWT, roles de usuario
+            y documentación con Swagger. Backend en Python/Flask.</p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Flask</span>
+            <span class="project-tag">JWT</span>
+            <span class="project-tag">REST API</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/zagarsix" target="_blank" class="proj-btn github"><i class="fab fa-github"></i>
+              Repo</a>
+            <a href="#" target="_blank" class="proj-btn demo"><i class="fas fa-external-link-alt"></i> Demo</a>
+          </div>
+        </div>
+
+        <div class="project-card fade-up" style="transition-delay:0.2s">
+          <div class="project-num">// PROJECT_03</div>
+          <h3 data-i18n="p3_title">Dashboard Analytics</h3>
+          <p data-i18n="p3_desc">Panel de control con visualización de datos en tiempo real, gráficos interactivos y
+            reportes exportables. Interfaz construida con React y CSS moderno.</p>
+          <div class="project-tags">
+            <span class="project-tag">React</span>
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">Charts</span>
+            <span class="project-tag">CSS3</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/zagarsix" target="_blank" class="proj-btn github"><i class="fab fa-github"></i>
+              Repo</a>
+            <a href="#" target="_blank" class="proj-btn demo"><i class="fas fa-external-link-alt"></i> Demo</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACTO ========== -->
+  <section id="contacto">
+    <div class="container">
+      <h2 class="section-title fade-up" data-i18n="nav_contact">Contacto</h2>
+      <div class="section-line fade-up" style="margin: 0 auto 3rem;"></div>
+      <p class="contact-desc fade-up" data-i18n="contact_desc">
+        ¿Tienes un proyecto en mente, una oferta laboral o simplemente quieres conectar? Estoy siempre disponible para
+        conversar. Puedes encontrarme en las siguientes redes o escribirme directamente.
+      </p>
+      <div class="social-grid fade-up">
+        <a href="https://linkedin.com/in/zagarsix117" target="_blank" class="social-icon linkedin">
+          <div class="icon-wrap"><i class="fab fa-linkedin-in"></i></div>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://github.com/zagarsix" target="_blank" class="social-icon github-s">
+          <div class="icon-wrap"><i class="fab fa-github"></i></div>
+          <span>GitHub</span>
+        </a>
+        <a href="https://wa.me/56962310719" target="_blank" class="social-icon whatsapp">
+          <div class="icon-wrap"><i class="fab fa-whatsapp"></i></div>
+          <span>WhatsApp</span>
+        </a>
+        <a href="mailto:claudk1006@gmail.com" class="social-icon gmail">
+          <div class="icon-wrap"><i class="fas fa-envelope"></i></div>
+          <span>Gmail</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© ZAGARSIX</span> &mdash; <span data-i18n="footer_text">Diseñado y construido con</span> <span>♥</span> &mdash;
+    <span id="year"></span>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- ========== CHATBOT ========== -->
+  <div class="chatbot-overlay" id="chatOverlay" onclick="closeChatOutside(event)">
+    <div class="chatbot-window" id="chatWindow">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <div class="chat-avatar">🤖</div>
+          <div class="chat-header-info">
+            <h4>ZagarBot</h4>
+            <div class="chat-status">
+              <div class="status-dot"></div> Online
+            </div>
+          </div>
+        </div>
+        <button class="chat-close" onclick="closeChat()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg bot" data-i18n="chat_welcome">
+          ¡Hola! 👋 Soy ZagarBot, el asistente de Zagarsix. Puedo responder preguntas sobre su experiencia, proyectos,
+          habilidades y más. ¿En qué puedo ayudarte?
+        </div>
+      </div>
+      <div class="chat-input-wrap">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Pregúntame algo..."
+          onkeydown="if(event.key==='Enter')sendMsg()" />
+        <button class="chat-send" onclick="sendMsg()"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ========== I18N ==========
+    const i18n = {
+      es: {
+        nav_about: "Sobre Mí", nav_skills: "Lenguajes y Herramientas",
+        nav_projects: "Proyectos", nav_contact: "Contacto",
+        chat_btn: "Chat", home_role: "Fullstack Web & Mobile Developer",
+        home_title: "Hola, soy\nZagarsix",
+        home_desc: "Mi historia con la programación comenzó de forma autodidacta, explorando tutoriales y construyendo pequeños proyectos por curiosidad. Esa chispa creció hasta convertirse en una vocación. Elegí ser desarrollador fullstack porque me apasiona entender el sistema completo: desde la interfaz que el usuario ve, hasta la lógica y los datos que lo sostienen.",
+        home_cta1: "Ver Proyectos", home_cta2: "Contáctame",
+        about_tray_title: "📁 Trayectoria Profesional",
+        about_tray: "Con 2 años de experiencia en desarrollo fullstack, he trabajado construyendo aplicaciones web completas, desde APIs REST con Flask y Python hasta interfaces modernas con React. Me especializo en crear soluciones que combinan buena experiencia de usuario con arquitecturas de backend sólidas.",
+        about_hobbies_title: "🎮 Hobbies e Intereses",
+        about_hobbies_desc: "Cuando no estoy programando, me puedes encontrar en:",
+        hobby_tag1: "🎮 Gaming", hobby_tag2: "📚 Lectura Tech", hobby_tag3: "🎵 Música", hobby_tag4:" 📖✝️ Teología", hobby_tag5:"🥁 Batería", hobby_tag6:"🏓 Tenis de mesa",
+        about_family: "La familia es mi motivación principal. Vivimos en Santiago y disfruto cada momento libre junto a los míos — es lo que me da energía para seguir creciendo como profesional.",
+        cv_btn: "Descargar CV",
+        tech_frontend: "Frontend", tech_backend: "Backend",
+        tech_db: "Base de Datos", tech_tools: "Herramientas",
+        p1_title: "E-Commerce App", p1_desc: "Plataforma de comercio electrónico con carrito de compras, autenticación de usuarios y panel de administración. Construida con React, Flask y MySQL.",
+        p2_title: "Task Manager API", p2_desc: "API RESTful para gestión de tareas y proyectos con autenticación JWT, roles de usuario y documentación con Swagger. Backend en Python/Flask.",
+        p3_title: "Dashboard Analytics", p3_desc: "Panel de control con visualización de datos en tiempo real, gráficos interactivos y reportes exportables. Interfaz construida con React y CSS moderno.",
+        contact_desc: "¿Tienes un proyecto en mente, una oferta laboral o simplemente quieres conectar? Estoy siempre disponible para conversar. Puedes encontrarme en las siguientes redes o escribirme directamente.",
+        footer_text: "Diseñado y construido con",
+        chat_welcome: "¡Hola! 👋 Soy ZagarBot, el asistente de Zagarsix. Puedo responder preguntas sobre su experiencia, proyectos, habilidades y más. ¿En qué puedo ayudarte?"
+      },
+      en: {
+        nav_about: "About Me", nav_skills: "Languages & Tools",
+        nav_projects: "Projects", nav_contact: "Contact",
+        chat_btn: "Chat", home_role: "Fullstack Web & MobileDeveloper",
+        home_title: "Hi, I'm\nZagarsix",
+        home_desc: "My journey with programming started self-taught, exploring tutorials and building small projects out of curiosity. That spark grew into a vocation. I chose to be a fullstack developer because I'm passionate about understanding the complete system: from the user interface all the way to the logic and data that power it.",
+        home_cta1: "View Projects", home_cta2: "Contact Me",
+        about_tray_title: "📁 Professional Background",
+        about_tray: "With 2 years of experience in fullstack development, I've worked building complete web applications, from REST APIs with Flask and Python to modern interfaces with React. I specialize in creating solutions that combine great user experience with solid backend architectures.",
+        about_hobbies_title: "🎮 Hobbies & Interests",
+        about_hobbies_desc: "When I'm not coding, you can find me:",
+        hobby_tag1: "🎮 Gaming", hobby_tag2: "📚 Tech Reading", hobby_tag3: "🎵 Music", hobby_tag4:" 📖✝️ Theology", hobby_tag5:"🥁 Drums", hobby_tag6:"🏓 Table Tennis",
+        about_family: "Family is my main motivation. We live in Santiago and I cherish every free moment with my loved ones — it's what gives me energy to keep growing as a professional.",
+        cv_btn: "Download CV",
+        tech_frontend: "Frontend", tech_backend: "Backend",
+        tech_db: "Database", tech_tools: "Tools",
+        p1_title: "E-Commerce App", p1_desc: "E-commerce platform with shopping cart, user authentication and admin panel. Built with React, Flask and MySQL.",
+        p2_title: "Task Manager API", p2_desc: "RESTful API for task and project management with JWT auth, user roles and Swagger documentation. Backend in Python/Flask.",
+        p3_title: "Dashboard Analytics", p3_desc: "Control panel with real-time data visualization, interactive charts and exportable reports. Interface built with React and modern CSS.",
+        contact_desc: "Have a project in mind, a job offer, or just want to connect? I'm always available to chat. You can find me on the following networks or write to me directly.",
+        footer_text: "Designed and built with",
+        chat_welcome: "Hi! 👋 I'm ZagarBot, Zagarsix's assistant. I can answer questions about his experience, projects, skills and more. How can I help you?"
+      }
+    };
+
+    let currentLang = 'es';
+
+    function toggleLang() {
+      currentLang = currentLang === 'es' ? 'en' : 'es';
+      document.getElementById('langBtn').textContent = currentLang === 'es' ? 'EN' : 'ES';
+      document.documentElement.lang = currentLang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[currentLang][key]) {
+          if (el.tagName === 'INPUT') el.placeholder = i18n[currentLang][key];
+          else el.textContent = i18n[currentLang][key];
+        }
+      });
+      const chatInput = document.getElementById('chatInput');
+      chatInput.placeholder = currentLang === 'es' ? 'Pregúntame algo...' : 'Ask me something...';
+    }
+
+    // ========== DARK/LIGHT MODE ==========
+    let isDark = true;
+    function toggleTheme() {
+      isDark = !isDark;
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
+    }
+
+    // ========== MOBILE MENU ==========
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+
+    // ========== BACK TO TOP ==========
+    const backTop = document.getElementById('back-top');
+    window.addEventListener('scroll', () => {
+      const progress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      if (progress > 0.3) backTop.classList.add('visible');
+      else backTop.classList.remove('visible');
+    });
+
+    // ========== SCROLL ANIMATIONS ==========
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ========== CHATBOT ==========
+    const PORTFOLIO_CONTEXT = `
+Eres ZagarBot, el asistente virtual del portafolio de Zagarsix, un desarrollador fullstack web & mobile con 4 años de experiencia.
+Stack principal: JavaScript, TypeScript, React, React- Native, Python, Flask, MySQL, Bootstrap, Tailwind, HTML5, CSS3, Git, GitHub, VS Code, Figma.
+Inició de forma autodidacta y eligió ser fullstack para dominar el stack completo.
+Vive en Santiago, Chile. Sus hobbies son gaming, lectura tech, música, fútbol y open source.
+Proyectos: E-Commerce App (React+Flask+MySQL), Task Manager API (Python/Flask+JWT), Dashboard Analytics (React).
+Responde en el mismo idioma en que te pregunten. Sé conciso, amable y técnico cuando sea necesario.
+`;
+
+    function openChat() {
+      document.getElementById('chatOverlay').classList.add('open');
+      document.getElementById('chatInput').focus();
+    }
+    function closeChat() {
+      document.getElementById('chatOverlay').classList.remove('open');
+    }
+    function closeChatOutside(e) {
+      if (e.target === document.getElementById('chatOverlay')) closeChat();
+    }
+
+    async function sendMsg() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      addMsg(text, 'user');
+      const loading = addMsg('...', 'bot loading');
+      try {
+        const res = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1000,
+            system: PORTFOLIO_CONTEXT,
+            messages: [{ role: 'user', content: text }]
+          })
+        });
+        const data = await res.json();
+        loading.remove();
+        const reply = data.content?.map(b => b.text || '').join('') || '⚠️ Sin respuesta.';
+        addMsg(reply, 'bot');
+      } catch {
+        loading.remove();
+        addMsg('⚠️ Error de conexión. Inténtalo de nuevo.', 'bot');
+      }
+    }
+
+    function addMsg(text, type) {
+      const wrap = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = 'msg ' + type;
+      div.textContent = text;
+      wrap.appendChild(div);
+      wrap.scrollTop = wrap.scrollHeight;
+      return div;
+    }
+
+    // YEAR
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
