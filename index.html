@@ -11,6 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <style>
     :root {
       --bg-primary: #050a12;
@@ -41,8 +42,8 @@
       --text-primary: #0f172a;
       --text-secondary: #334155;
       --text-dim: #64748b;
-      --border-glow: rgba(0, 102, 204, 0.3);
-      --glass: rgba(240, 244, 255, 0.85);
+      --border-glow: rgba(0, 85, 170, 0.3);
+      --glass: rgba(238, 242, 251, 0.92);
     }
 
     *,
@@ -80,8 +81,8 @@
 
     [data-theme="light"] body::before {
       background-image:
-        linear-gradient(rgba(0, 102, 204, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 102, 204, 0.06) 1px, transparent 1px);
+        linear-gradient(rgba(0, 85, 170, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 85, 170, 0.05) 1px, transparent 1px);
     }
 
     /* ========== NAVBAR ========== */
@@ -103,7 +104,7 @@
     }
 
     [data-theme="light"] nav {
-      background: rgba(240, 244, 255, 0.9);
+      background: rgba(238, 242, 251, 0.93);
     }
 
     .nav-brand {
@@ -198,6 +199,10 @@
       background: rgba(0, 245, 255, 0.07);
     }
 
+    [data-theme="light"] .nav-links a:hover {
+      background: rgba(0, 85, 170, .07);
+    }
+
     .nav-controls {
       display: flex;
       align-items: center;
@@ -288,7 +293,7 @@
     }
 
     [data-theme="light"] .mobile-menu {
-      background: rgba(240, 244, 255, 0.97);
+      background: rgba(238, 242, 251, 0.97);
     }
 
     .mobile-menu.open {
@@ -389,9 +394,18 @@
       font-weight: 900;
       line-height: 1.15;
       margin-bottom: 1rem;
+    }
+
+    [data-theme="dark"] .home-text h1 {
       background: linear-gradient(135deg, #fff, var(--neon-cyan));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+
+    [data-theme="light"] .home-text h1 {
+      color: #0f172a;
+      background: none;
+      -webkit-text-fill-color: #0f172a;
     }
 
     .home-text .role {
@@ -792,6 +806,10 @@
       gap: 0.7rem;
     }
 
+    [data-theme="light"] .tech-category h3 {
+      color: var(--neon-blue);
+    }
+
     .tech-category h3::after {
       content: '';
       flex: 1;
@@ -819,10 +837,19 @@
       backdrop-filter: blur(10px);
     }
 
+    [data-theme="light"] .tech-card {
+      border-color: rgba(0, 85, 170, .14);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+    }
+
     .tech-card:hover {
       transform: translateY(-5px);
       border-color: var(--neon-cyan);
-      box-shadow: 0 8px 30px rgba(0, 245, 255, 0.15), 0 0 20px rgba(0, 245, 255, 0.08);
+      box-shadow: 0 8px 30px rgba(0, 245, 255, 0.2), 0 0 20px rgba(0, 245, 255, 0.08);
+    }
+
+    [data-theme="light"] .tech-card:hover {
+      box-shadow: 0 8px 30px rgba(0, 85, 170, .2);
     }
 
     .tech-card i,
@@ -841,6 +868,11 @@
       color: var(--text-secondary);
       text-align: center;
       letter-spacing: 0.5px;
+    }
+
+    [data-theme="light"] .tech-card span {
+      color: #1e293b;
+      font-weight: 600;
     }
 
     /* Tech icon colors */
@@ -1603,7 +1635,7 @@
           <div class="family-photo">
             <img src="images/familia.png" alt="Mi familia">
           </div>
-          <div class="corner-tag">Mi clan</div>
+          <div class="corner-tag" data-i18n="photo_tag">Mi clan</div>
           <div class="description-family fade-up">
             <p data-i18n="about_family">
               La familia es mi motivación principal: un gran pedazo de mi corazón plasmado en una imagen. Disfruto cada
@@ -1671,7 +1703,15 @@
           <div class="tech-card"><i class="fab fa-css3-alt ic-css"></i><span>CSS3</span></div>
           <div class="tech-card"><i class="fab fa-js ic-js"></i><span>JavaScript</span></div>
           <div class="tech-card"><i class="fab fa-react ic-react"></i><span>React</span></div>
+          <div class="tech-card"><i class="devicon-nextjs-plain"></i><span>Next.js</span></div>
+          <div class="tech-card"><i class="fab fa-react ic-react" style="opacity:.7"></i><span>React Native</span></div>
           <div class="tech-card"><i class="fab fa-bootstrap ic-bootstrap"></i><span>Bootstrap</span></div>
+          <div class="tech-card"><i class="devicon-tailwindcss-original colored"></i><span>Tailwind</span>
+          </div>
+          <div class="tech-card"><i class="devicon-typescript-plain colored"></i><span>TypeScript</span>
+          </div>
+          <div class="tech-card"><i class="fas fa-th ic-css"></i><span>CSS Grid</span></div>
+          <div class="tech-card"><i class="fas fa-align-left ic-tailwind"></i><span>Flexbox</span></div>
         </div>
       </div>
 
@@ -1679,15 +1719,22 @@
         <h3 data-i18n="tech_backend">Backend</h3>
         <div class="tech-grid">
           <div class="tech-card"><i class="fab fa-python ic-python"></i><span>Python</span></div>
-          <div class="tech-card" style="color:#888"><i class="fas fa-flask ic-flask"></i><span>Flask</span></div>
+          <div class="tech-card" style="color:#888"><i class="devicon-flask-original"></i><span>Flask</span></div>
           <div class="tech-card"><i class="fab fa-node-js ic-node"></i><span>Node.js</span></div>
+          <div class="tech-card"><i class="devicon-express-original"></i><span>Express</span></div>
+          <div class="tech-card"><i class="fas fa-key ic-jwt"></i><span>JWT</span></div>
+          <div class="tech-card"><i class="devicon-socketio-original"></i><span>Socket.IO</span></div>
         </div>
       </div>
 
       <div class="tech-category fade-up" style="transition-delay:0.2s">
         <h3 data-i18n="tech_db">Base de Datos</h3>
         <div class="tech-grid">
-          <div class="tech-card"><i class="fas fa-database ic-mysql"></i><span>MySQL</span></div>
+          <div class="tech-card"><i class="devicon-sqlalchemy-plain"></i><span>SQLAlchemy</span></div>
+          <div class="tech-card"><i class="devicon-mysql-original"></i><span>MySQL</span></div>
+          <div class="tech-card"><i class="devicon-postgresql-plain colored"></i><span>PostgreSQL</span></div>
+          <div class="tech-card"><i class="devicon-sqlite-plain colored"></i><span>SQLite</span></div>
+          <div class="tech-card"><i class="devicon-mongodb-plain colored"></i><span>MongoDB</span></div>
         </div>
       </div>
 
@@ -1695,10 +1742,16 @@
         <h3 data-i18n="tech_tools">Herramientas</h3>
         <div class="tech-grid">
           <div class="tech-card"><i class="fab fa-git-alt ic-git"></i><span>Git</span></div>
-          <div class="tech-card"><i class="fab fa-github ic-github"></i><span>GitHub</span></div>
-          <div class="tech-card"><i class="fas fa-code ic-vscode"></i><span>VS Code</span></div>
+          <div class="tech-card"><i class="devicon-github-original"></i><span>GitHub</span></div>
+          <div class="tech-card"><i class="devicon-vscode-plain colored"></i><span>VS Code</span></div>
           <div class="tech-card"><i class="fab fa-npm ic-npm"></i><span>npm</span></div>
+          <div class="tech-card"><i class="fas fa-broadcast-tower ic-postman"></i><span>Pusher</span></div>
+          <div class="tech-card"><i class="fas fa-paper-plane" style="color:#7c3aed"></i><span>Resend</span></div>
+          <div class="tech-card"><i class="devicon-postman-plain colored"></i><span>Postman</span></div>
+          <div class="tech-card"><i class="devicon-swagger-plain colored"></i><span>Swagger</span></div>
           <div class="tech-card"><i class="fab fa-figma ic-figma"></i><span>Figma</span></div>
+          <div class="tech-card"><i class="devicon-androidstudio-plain colored"></i><span>Android Studio</span></div>
+          <div class="tech-card"><i class="devicon-linux-plain colored"></i><span>Linux</span></div>
         </div>
       </div>
     </div>
@@ -1858,6 +1911,7 @@
         about_hobbies_title: "🎮 Hobbies e Intereses",
         about_hobbies_desc: "Cuando no estoy programando, me puedes encontrar en:",
         hobby_tag1: "🎮 Gaming", hobby_tag2: "📚 Lectura Tech", hobby_tag3: "🎵 Música", hobby_tag4: " 📖✝️ Teología", hobby_tag5: "🥁 Batería", hobby_tag6: "🏓 Tenis de mesa",
+        photo_tag: "Mi clan",
         about_family: "La familia es mi motivación principal: un gran pedazo de mi corazón plasmado en una imagen. Disfruto cada momento libre junto a los míos; es lo que me da energía para seguir creciendo como profesional.",
         cv_btn: "Ver / Descargar CV",
         tech_frontend: "Frontend", tech_backend: "Backend",
@@ -1884,6 +1938,7 @@
         about_hobbies_title: "🎮 Hobbies & Interests",
         about_hobbies_desc: "When I'm not coding, you can find me:",
         hobby_tag1: "🎮 Gaming", hobby_tag2: "📚 Tech Reading", hobby_tag3: "🎵 Music", hobby_tag4: " 📖✝️ Theology", hobby_tag5: "🥁 Drums", hobby_tag6: "🏓 Table Tennis",
+        photo_tag: "My crew",
         about_family: "Family is my main motivation: a big piece of my heart captured in a picture. I cherish every free moment with my loved ones; it's what gives me energy to keep growing as a professional.",
         cv_btn: "View / Download CV",
         tech_frontend: "Frontend", tech_backend: "Backend",
