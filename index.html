@@ -473,6 +473,10 @@
       box-shadow: 0 6px 25px rgba(0, 245, 255, 0.4);
     }
 
+    [data-theme="light"] .btn-primary {
+      color: #fff;
+    }
+
     .btn-outline {
       background: transparent;
       color: var(--neon-cyan);
@@ -494,6 +498,15 @@
       background: rgba(0, 245, 255, 0.1);
       box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
       transform: translateY(-2px);
+    }
+
+    [data-theme="light"] .btn-outline {
+      color: var(--neon-blue);
+      border-color: var(--neon-blue);
+    }
+
+    [data-theme="light"] .btn-outline:hover {
+      background: rgba(0, 61, 143, .08);
     }
 
     .home-image-wrap {
@@ -677,6 +690,10 @@
       margin-top: 1.5rem;
     }
 
+    [data-theme="light"] .sobre-text h3 {
+      color: var(--neon-blue);
+    }
+
     .sobre-text h3:first-child {
       margin-top: 0;
     }
@@ -759,6 +776,13 @@
       padding: 0.3rem 0.8rem;
       border-radius: 20px;
       transition: all var(--transition);
+    }
+
+    [data-theme="light"] .hobby-tag {
+      background: rgba(0, 85, 170, .08);
+      border-color: rgba(0, 85, 170, .3);
+      color: var(--neon-blue);
+      font-weight: 600;
     }
 
     .hobby-tag:hover {
@@ -957,6 +981,11 @@
       overflow: hidden;
     }
 
+    [data-theme="light"] .project-card {
+      border-color: rgba(0, 85, 170, .14);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+    }
+
     .project-card::before {
       content: '';
       position: absolute;
@@ -974,6 +1003,10 @@
       transform: translateY(-6px);
       border-color: rgba(0, 245, 255, 0.3);
       box-shadow: 0 15px 40px rgba(0, 245, 255, 0.1), 0 0 30px rgba(139, 92, 246, 0.08);
+    }
+
+    [data-theme="light"] .project-card:hover {
+      box-shadow: 0 15px 40px rgba(0, 85, 170, .18);
     }
 
     .project-card:hover::before {
@@ -1017,6 +1050,13 @@
       color: var(--neon-cyan);
     }
 
+    [data-theme="light"] .project-tag {
+      background: rgba(0, 85, 170, .07);
+      border-color: rgba(0, 85, 170, .25);
+      color: var(--neon-blue);
+      font-weight: 600;
+    }
+
     .project-links {
       display: flex;
       gap: 0.75rem;
@@ -1047,10 +1087,21 @@
     }
 
     .proj-btn.github:hover {
-      border-color: #aaa;
-      color: #eee;
+      border-color: #ccc;
+      color: var(--text-primary);
       background: rgba(255, 255, 255, 0.05);
       transform: translateY(-2px);
+    }
+
+    [data-theme="light"] .proj-btn.github {
+      border-color: rgba(0, 0, 0, .2);
+      color: var(--text-secondary);
+    }
+
+    [data-theme="light"] .proj-btn.github:hover {
+      border-color: #222;
+      color: #111;
+      background: rgba(0, 0, 0, .04);
     }
 
     .proj-btn.demo {
@@ -1063,6 +1114,12 @@
       background: linear-gradient(135deg, rgba(0, 245, 255, 0.25), rgba(139, 92, 246, 0.25));
       box-shadow: 0 4px 15px rgba(0, 245, 255, 0.2);
       transform: translateY(-2px);
+    }
+
+    [data-theme="light"] .proj-btn.demo {
+      color: var(--neon-blue);
+      border-color: rgba(0, 61, 143, .3);
+      background: rgba(0, 61, 143, .06);
     }
 
     /* ========== CONTACTO ========== */
@@ -1110,6 +1167,12 @@
       backdrop-filter: blur(10px);
     }
 
+    [data-theme="light"] .social-icon .icon-wrap {
+      background: rgba(255, 255, 255, .9);
+      border-color: rgba(0, 0, 0, .12);
+      color: #999;
+    }
+
     .social-icon span {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.72rem;
@@ -1136,6 +1199,12 @@
       color: #eee;
       border-color: #eee;
       box-shadow: 0 8px 30px rgba(238, 238, 238, 0.2);
+    }
+
+    [data-theme="light"] .social-icon.github-s:hover .icon-wrap {
+      color: #111;
+      border-color: #111;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .2);
     }
 
     .social-icon.whatsapp:hover .icon-wrap {
@@ -1357,6 +1426,11 @@
       border-radius: 4px 12px 12px 12px;
     }
 
+    [data-theme="light"] .msg.bot {
+      background: rgba(0, 85, 170, .07);
+      border-color: rgba(0, 85, 170, .2);
+    }
+
     .msg.user {
       background: linear-gradient(135deg, rgba(0, 102, 255, 0.3), rgba(139, 92, 246, 0.3));
       color: var(--text-primary);
@@ -1387,6 +1461,11 @@
       padding: 0.6rem 1rem;
       outline: none;
       transition: border-color var(--transition);
+    }
+
+    [data-theme="light"] .chat-input {
+      background: rgba(255, 255, 255, .8);
+      color: var(--text-primary);
     }
 
     .chat-input:focus {
@@ -1538,7 +1617,7 @@
     }
 
     [data-theme="light"] .blob {
-      opacity: 0.04;
+      opacity: 0.03;
     }
   </style>
 </head>
