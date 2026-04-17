@@ -672,6 +672,61 @@
       font-size: 1.02rem;
     }
 
+    .description-family {
+      color: var(--text-secondary);
+      line-height: 1.3;
+      margin-top: .8rem;
+      font-size: 1.02rem;
+    }
+
+    /* Experience timeline */
+    .exp-item {
+      border-left: 2px solid var(--border-glow);
+      padding: 0 0 1.5rem 1.2rem;
+      position: relative;
+      margin-bottom: .2rem;
+    }
+
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 5px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 8px var(--neon-cyan);
+    }
+
+    .exp-item h4 {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-primary);
+    }
+
+    .exp-item .exp-co {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .76rem;
+      color: var(--neon-purple);
+      margin-bottom: .15rem;
+    }
+
+    .exp-item .exp-dt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      color: var(--text-dim);
+      margin-bottom: .4rem;
+    }
+
+    .exp-item p {
+      font-size: .92rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
     .hobbies-grid {
       display: flex;
       flex-wrap: wrap;
@@ -1530,8 +1585,6 @@
           <div class="orbit-ring r2"></div>
           <div class="photo-placeholder">
             <img src="images/Claudio.jpg" alt="Foto de perfil">
-            <!-- <i class="fas fa-user placeholder-icon"></i>
-            <span class="placeholder-text">// tu-foto.jpg</span> -->
           </div>
         </div>
       </div>
@@ -1547,18 +1600,44 @@
         <div class="family-photo-wrap fade-up">
           <div class="family-photo">
             <img src="images/familia.png" alt="Mi familia">
-            <!--<i class="fas fa-users placeholder-icon"></i>
-            <span class="placeholder-text">// foto-familia.jpg</span> -->
           </div>
           <div class="corner-tag">Mi clan</div>
+          <div class="description-family fade-up">
+            <p data-i18n="about_family">
+              La familia es mi motivación principal: un gran pedazo de mi corazón plasmado en una imagen. Disfruto cada
+              momento libre junto a los míos; es lo que me da energía para seguir creciendo como profesional.
+            </p>
+          </div>
         </div>
         <div class="sobre-text fade-up" style="transition-delay:0.15s">
           <h3 data-i18n="about_tray_title">📁 Trayectoria Profesional</h3>
           <p data-i18n="about_tray">
-            Con 2 años de experiencia en desarrollo fullstack, he trabajado construyendo aplicaciones web completas,
-            desde APIs REST con Flask y Python hasta interfaces modernas con React. Me especializo en crear soluciones
-            que combinan buena experiencia de usuario con arquitecturas de backend sólidas.
+            Con 4 años de experiencia en desarrollo fullstack, he trabajado construyendo aplicaciones web y mobile
+            completas, desde APIs REST con Flask y Python hasta interfaces modernas con React y React Native. Me
+            especializo en
+            crear soluciones que combinan buena experiencia de usuario con arquitecturas de backend sólidas.
           </p>
+          <div class="exp-item">
+            <h4>Fullstack Developer / Mobile</h4>
+            <div class="exp-co">Luuí - Startup HealthTech (Ecuador)</div>
+            <div class="exp-dt">Mar 2025 - Presente · Remoto</div>
+            <p data-i18n="exp1_desc">Interfaces responsivas desde Figma, integración REST APIs, Node.js + Express +
+              PostgreSQL, autenticación JWT. Plataforma médica para cuidado geriátrico.</p>
+          </div>
+          <div class="exp-item">
+            <h4>Fullstack Developer</h4>
+            <div class="exp-co">TrainIt - Simulación laboral</div>
+            <div class="exp-dt">Jun 2025 - Nov 2025 · Remoto</div>
+            <p data-i18n="exp2_desc">Tablero tipo Trello con Next.js + TypeScript. Sistema de notificaciones en tiempo
+              real, flujos de permisos, Python + Flask y PostgreSQL, metodología ágil.</p>
+          </div>
+          <div class="exp-item">
+            <h4>Frontend Developer & UX/UI (Freelance)</h4>
+            <div class="exp-co">Colegio Virtual Alianza</div>
+            <div class="exp-dt">May 2024 - Nov 2024 · Santiago</div>
+            <p data-i18n="exp3_desc">React, Bootstrap, HTML5, CSS3 para plataforma educativa homeschool. Diseño
+              responsive y mejoras continuas basadas en feedback.</p>
+          </div>
           <h3 data-i18n="about_hobbies_title">🎮 Hobbies e Intereses</h3>
           <p data-i18n="about_hobbies_desc">Cuando no estoy programando, me puedes encontrar en:</p>
           <div class="hobbies-grid">
@@ -1569,12 +1648,8 @@
             <span class="hobby-tag" data-i18n="hobby_tag5">🥁 Batería</span>
             <span class="hobby-tag" data-i18n="hobby_tag6">🏓 Tenis de mesa</span>
           </div>
-          <p data-i18n="about_family">
-            La familia es mi motivación principal. Vivimos en Santiago y disfruto cada momento libre junto a los míos —
-            es lo que me da energía para seguir creciendo como profesional.
-          </p>
-          <a href="#" class="cv-link" download data-i18n="cv_btn">
-            <i class="fas fa-file-download"></i> Descargar CV
+          <a href="https://flowcv.com/resume/fn9716kr8s" target="_blank" class="cv-link">
+            <i class="fas fa-file-alt"></i><span data-i18n="cv_btn">Ver / Descargar CV</span>
           </a>
         </div>
       </div>
@@ -1774,12 +1849,15 @@
         home_desc: "Mi nombre de perfil se debe a mi antiguo apodo de jugador: Zagarsix. Mi historia con la programación comenzó de forma autodidacta, explorando tutoriales y construyendo pequeños proyectos por curiosidad. Esa chispa creció hasta convertirse en una vocación. Elegí ser desarrollador fullstack porque me apasiona entender el sistema completo: desde la interfaz que el usuario ve, hasta la lógica y los datos que lo sostienen. Certificado en 4Geeks Academy con experiencia real en startups HealthTech y plataformas educativas.",
         home_cta1: "Ver Proyectos", home_cta2: "Contáctame",
         about_tray_title: "📁 Trayectoria Profesional",
-        about_tray: "Con 2 años de experiencia en desarrollo fullstack, he trabajado construyendo aplicaciones web completas, desde APIs REST con Flask y Python hasta interfaces modernas con React. Me especializo en crear soluciones que combinan buena experiencia de usuario con arquitecturas de backend sólidas.",
+        about_tray: "Con 4 años de experiencia en desarrollo fullstack, he trabajado construyendo aplicaciones web y mobile completas, desde APIs REST con Flask y Python hasta interfaces modernas con React y React Native. Me especializo en crear soluciones que combinan buena experiencia de usuario con arquitecturas de backend sólidas.",
+        exp1_desc: "Interfaces responsivas desde Figma, integración REST APIs, Node.js + Express + PostgreSQL, autenticación JWT. Plataforma médica para cuidado geriátrico.",
+        exp2_desc: "Tablero tipo Trello con Next.js + TypeScript. Sistema de notificaciones en tiempo real, flujos de permisos, Python + Flask y PostgreSQL, metodología ágil.",
+        exp3_desc: "React, Bootstrap, HTML5, CSS3 para plataforma educativa homeschool. Diseño responsive y mejoras continuas basadas en feedback.",
         about_hobbies_title: "🎮 Hobbies e Intereses",
         about_hobbies_desc: "Cuando no estoy programando, me puedes encontrar en:",
         hobby_tag1: "🎮 Gaming", hobby_tag2: "📚 Lectura Tech", hobby_tag3: "🎵 Música", hobby_tag4: " 📖✝️ Teología", hobby_tag5: "🥁 Batería", hobby_tag6: "🏓 Tenis de mesa",
-        about_family: "La familia es mi motivación principal. Vivimos en Santiago y disfruto cada momento libre junto a los míos — es lo que me da energía para seguir creciendo como profesional.",
-        cv_btn: "Descargar CV",
+        about_family: "La familia es mi motivación principal: un gran pedazo de mi corazón plasmado en una imagen. Disfruto cada momento libre junto a los míos; es lo que me da energía para seguir creciendo como profesional.",
+        cv_btn: "Ver / Descargar CV",
         tech_frontend: "Frontend", tech_backend: "Backend",
         tech_db: "Base de Datos", tech_tools: "Herramientas",
         p1_title: "E-Commerce App", p1_desc: "Plataforma de comercio electrónico con carrito de compras, autenticación de usuarios y panel de administración. Construida con React, Flask y MySQL.",
@@ -1797,12 +1875,15 @@
         home_desc: "My profile name is due to my old gamer nickname: Zagarsix. My journey with programming started self-taught, exploring tutorials and building small projects out of curiosity. That spark grew into a vocation. I chose to be a fullstack developer because I'm passionate about understanding the complete system: from the user interface all the way to the logic and data that power it. Certified at 4Geeks Academy with real experience in HealthTech startups and educational platforms.",
         home_cta1: "View Projects", home_cta2: "Contact Me",
         about_tray_title: "📁 Professional Background",
-        about_tray: "With 2 years of experience in fullstack development, I've worked building complete web applications, from REST APIs with Flask and Python to modern interfaces with React. I specialize in creating solutions that combine great user experience with solid backend architectures.",
+        about_tray: "With 4 years of experience in fullstack development, I've worked building complete web and mobileapplications, from REST APIs with Flask and Python to modern interfaces with React and React Native. I specialize in creating solutions that combine great user experience with solid backend architectures.",
+        exp1_desc: "Responsive interfaces from Figma designs, REST API integration, Node.js + Express + PostgreSQL, JWT auth. Medical platform for geriatric care.",
+        exp2_desc: "Trello-like board with Next.js + TypeScript. Real-time notification system, permission flows, Python + Flask y PostgreSQL, agile methodology.",
+        exp3_desc: "React, Bootstrap, HTML5, CSS3 for an online homeschool platform. Responsive design and continuous feedback-driven improvements.",
         about_hobbies_title: "🎮 Hobbies & Interests",
         about_hobbies_desc: "When I'm not coding, you can find me:",
         hobby_tag1: "🎮 Gaming", hobby_tag2: "📚 Tech Reading", hobby_tag3: "🎵 Music", hobby_tag4: " 📖✝️ Theology", hobby_tag5: "🥁 Drums", hobby_tag6: "🏓 Table Tennis",
-        about_family: "Family is my main motivation. We live in Santiago and I cherish every free moment with my loved ones — it's what gives me energy to keep growing as a professional.",
-        cv_btn: "Download CV",
+        about_family: "Family is my main motivation: a big piece of my heart captured in a picture. I cherish every free moment with my loved ones; it's what gives me energy to keep growing as a professional.",
+        cv_btn: "View / Download CV",
         tech_frontend: "Frontend", tech_backend: "Backend",
         tech_db: "Database", tech_tools: "Tools",
         p1_title: "E-Commerce App", p1_desc: "E-commerce platform with shopping cart, user authentication and admin panel. Built with React, Flask and MySQL.",
