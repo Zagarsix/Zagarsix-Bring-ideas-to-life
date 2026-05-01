@@ -2246,10 +2246,14 @@ EDUCACIÓN:
       if (e.target === document.getElementById('chatOverlay')) closeChat();
     }
 
+    let isRequesting = false;
+
     async function sendMsg() {
       const input = document.getElementById('chatInput');
       const text = input.value.trim();
-      if (!text) return;
+
+      if (!text || isRequesting) return;
+      isRequesting = true;
       input.value = '';
       addMsg(text, 'user');
       history.push({ role: 'user', parts: [{ text }] });
@@ -2265,15 +2269,14 @@ EDUCACIÓN:
             },
             contents: history,
             generationConfig: {
-              maxOutputTokens: 1024,
+              maxOutputTokens: 512,
               temperature: 0.7
             }
           })
         });
 
-        if (!res.ok) {
-          const e = await res.json().catch(() => ({}));
-          throw new Error(e.error?.message || `HTTP ${res.status}`);
+        if (res.status === 429) {
+          throw new Error("¡Vaya! He hablado demasiado por ahora. Dame un respiro de un minuto para recargar energías.")
         }
 
         const data = await res.json();
@@ -2287,14 +2290,11 @@ EDUCACIÓN:
         addMsg(reply, 'bot');
 
       } catch (err) {
-        loading.remove();
-        const isRate = err.message?.includes('429') || err.message?.includes('quota') || err.message?.includes('RESOURCE_EXHAUSTED');
-        addMsg(
-          isRate
-            ? '⏳ Límite de consultas alcanzado. Espera unos segundos e intenta de nuevo.'
-            : `⚠️ Error: ${err.message}`,
-          'bot'
-        );
+        if (loading) loading.remove();
+        addMsg(`⚠️ ${err.message}`, 'bot');
+      } finally {
+        isRequesting = false;
+        input.focus();
       }
     }
 
