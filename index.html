@@ -2283,7 +2283,7 @@ EDUCACIÓN:
         history.push({ role: 'model', parts: [{ text: reply }] });
 
         // Limitar historial para no sobrecargar tokens
-        if (history.length > 20) history = history.slice(-18);
+        if (history.length > 10) history = history.slice(-10);
         addMsg(reply, 'bot');
 
       } catch (err) {
