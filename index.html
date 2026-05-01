@@ -2188,14 +2188,52 @@
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
     // ========== CHATBOT ==========
-    const PORTFOLIO_CONTEXT = `
-Eres ZagarBot, el asistente virtual del portafolio de Zagarsix, un desarrollador fullstack web & mobile con 4 años de experiencia.
-Stack principal: JavaScript, TypeScript, React, React- Native, Python, Flask, MySQL, Bootstrap, Tailwind, HTML5, CSS3, Git, GitHub, VS Code, Figma.
-Inició de forma autodidacta y eligió ser fullstack para dominar el stack completo.
-Vive en Santiago, Chile. Sus hobbies son gaming, lectura tech, música, fútbol y open source.
-Proyectos: E-Commerce App (React+Flask+MySQL), Task Manager API (Python/Flask+JWT), Dashboard Analytics (React).
+    const CTX = `
+Eres ZagarBot, el asistente virtual del portafolio de Claudio Ernesto Candía Jofré (alias Zagarsix).
 Responde en el mismo idioma en que te pregunten. Sé conciso, amable y técnico cuando sea necesario.
+No inventes información que no esté aquí.
+
+DATOS PERSONALES:
+- Nombre: Claudio Ernesto Candia Jofré | Alias: Zagarsix
+- Ubicación: Santiago, Chile
+- Email: claudk1006@gmail.com | WhatsApp: +56962310719
+- LinkedIn: linkedin.com/in/zagarsix117 | GitHub: github.com/zagarsix
+- CV: https://flowcv.com/resume/fn9716kr8s
+- Inglés: B1 (intermedio)
+
+PERFIL:
+Full Stack developer web & mobile especializado en React, Next.js, Node.js y Python.
+Experiencia en plataformas educativas, sistemas colaborativos y aplicaciones de salud. 4+ años de experiencia.
+
+HOBBIES E INTERESES:
+Gaming, lectura tech, música, teología, batería y tenis de mesa.
+
+STACK TÉCNICO:
+Frontend: JavaScript, TypeScript, React, Next.js, React Native, Bootstrap, Tailwind, HTML5, CSS3, Flexbox, CSS Grid, Responsive Design
+Backend: Python, Flask, Node.js, Express, JWT, REST APIs, Socket.IO
+Bases de datos: SQLAlchemy, MySQL, PostgreSQL, SQLite, MongoDB
+Herramientas: Git, GitHub, Figma, Postman, VS Code, Pusher, Resend, Swagger, Android Studio, Linux
+
+EXPERIENCIA:
+1. Luuí (HealthTech, Ecuador) - Mar 2025-Presente. React Native/Nodejs/Express/PostgreSQL/JWT. Plataforma médica geriátrica.
+2. TrainIt - Jun-Nov 2024. Next.js, TypeScript, Pyhton + Flask, PostgreSQL. Tablero Trello, notificaciones, permisos.
+3. Colegio Virtual Alianza (freelance) - May-Nov 2024. React, Bootstrap, HTML/CSS, plataforma educativa homeschool.
+
+PROYECTOS:
+- Psico-reinventar (2022): app agendamiento psicológico, certificación 4Geeks. Javascript, Python+Flask/SQLAlchemy.
+- Luuí: plataforma médica (ver experiencia 1).
+- TrainIt Kanban: tablero colaborativo (ver experiencia 2).
+- Colegio Virtual Alianza: plataforma educativa (ver experiencia 3).
+
+EDUCACIÓN:
+- 4Geeks Academy, Full Stack Developer, 2022, Santiago.
+- Universidad de Chile, Químico Ambiental (hasta 4° año), desde 2012.
 `;
+
+    const GEMINI_KEY = 'AIzaSyAFA6NwRLMPBEgd-F5siqwJwpIlaKY_C8Y';
+    const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_KEY}`;
+
+    let history = [];
 
     function openChat() {
       document.getElementById('chatOverlay').classList.add('open');
@@ -2214,25 +2252,49 @@ Responde en el mismo idioma en que te pregunten. Sé conciso, amable y técnico 
       if (!text) return;
       input.value = '';
       addMsg(text, 'user');
-      const loading = addMsg('...', 'bot loading');
+      history.push({ role: 'user', parts: [{ text }] });
+
+      const loading = addMsg('● ● ●', 'bot loading');
       try {
-        const res = await fetch('https://api.anthropic.com/v1/messages', {
+        const res = await fetch(GEMINI_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514',
-            max_tokens: 1000,
-            system: PORTFOLIO_CONTEXT,
-            messages: [{ role: 'user', content: text }]
+            system_instruction: {
+              parts: [{ text: CTX }]
+            },
+            contents: history,
+            generationConfig: {
+              maxOutputTokens: 1024,
+              temperature: 0.7
+            }
           })
         });
+
+        if (!res.ok) {
+          const e = await res.json().catch(() => ({}));
+          throw new Error(e.error?.message || `HTTP ${res.status}`);
+        }
+
         const data = await res.json();
         loading.remove();
-        const reply = data.content?.map(b => b.text || '').join('') || '⚠️ Sin respuesta.';
+
+        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sin respuesta.';
+        history.push({ role: 'model', parts: [{ text: reply }] });
+
+        // Limitar historial para no sobrecargar tokens
+        if (history.length > 20) history = history.slice(-18);
         addMsg(reply, 'bot');
-      } catch {
+
+      } catch (err) {
         loading.remove();
-        addMsg('⚠️ Error de conexión. Inténtalo de nuevo.', 'bot');
+        const isRate = err.message?.includes('429') || err.message?.includes('quota') || err.message?.includes('RESOURCE_EXHAUSTED');
+        addMsg(
+          isRate
+            ? '⏳ Límite de consultas alcanzado. Espera unos segundos e intenta de nuevo.'
+            : `⚠️ Error: ${err.message}`,
+          'bot'
+        );
       }
     }
 
