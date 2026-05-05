@@ -2231,8 +2231,10 @@ EDUCACIÓN:
 `;
 
     const GEMINI_KEY = 'AIzaSyAFA6NwRLMPBEgd-F5siqwJwpIlaKY_C8Y';
-    const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`;
+    const GEMINI_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
+
     let history = [];
+    let isRequesting = false;
 
     function openChat() {
       document.getElementById('chatOverlay').classList.add('open');
@@ -2244,8 +2246,6 @@ EDUCACIÓN:
     function closeChatOutside(e) {
       if (e.target === document.getElementById('chatOverlay')) closeChat();
     }
-
-    let isRequesting = false;
 
     async function sendMsg() {
       const input = document.getElementById('chatInput');
@@ -2263,10 +2263,13 @@ EDUCACIÓN:
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            system_instruction: {
-              parts: [{ text: CTX }]
-            },
-            contents: history,
+            contents: [
+              {
+                role: "user",
+                parts: [{ text: CTX }]
+              },
+              ...history
+            ],
             generationConfig: {
               maxOutputTokens: 512,
               temperature: 0.7
@@ -2274,8 +2277,9 @@ EDUCACIÓN:
           })
         });
 
-        if (res.status === 429) {
-          throw new Error("¡Vaya! He hablado demasiado por ahora. Dame un respiro de un minuto para recargar energías.")
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.error?.message || "¡Vaya! He hablado demasiado por ahora. Dame un respiro de un minuto para recargar energías.")
         }
 
         const data = await res.json();
@@ -2289,7 +2293,7 @@ EDUCACIÓN:
         addMsg(reply, 'bot');
 
       } catch (err) {
-        if (loading) loading.remove();
+        loading.remove();
         addMsg(`⚠️ ${err.message}`, 'bot');
       } finally {
         isRequesting = false;
