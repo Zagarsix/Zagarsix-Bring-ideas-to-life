@@ -1685,9 +1685,9 @@
     <div class="nav-controls">
       <button class="nav-btn" id="langBtn" onclick="toggleLang()">EN</button>
       <button class="nav-btn icon-btn" id="themeBtn" onclick="toggleTheme()" title="Modo oscuro/claro">🌙</button>
-      <button class="chatbot-btn" onclick="openChat()">
+      <!--<button class="chatbot-btn" onclick="openChat()">
         <i class="fas fa-robot"></i> <span data-i18n="chat_btn">Chat</span>
-      </button>
+      </button> -->
     </div>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1703,9 +1703,9 @@
     <div class="mobile-controls">
       <button class="nav-btn" onclick="toggleLang()">EN / ES</button>
       <button class="nav-btn icon-btn" onclick="toggleTheme()">🌙 / ☀️</button>
-      <button class="chatbot-btn" onclick="openChat(); closeMenu()">
+      <!-- <button class="chatbot-btn" onclick="openChat(); closeMenu()">
         <i class="fas fa-robot"></i> Chat
-      </button>
+      </button> -->
     </div>
   </div>
 
@@ -2230,7 +2230,7 @@ EDUCACIÓN:
 - Universidad de Chile, Químico Ambiental (hasta 4° año), desde 2012.
 `;
 
-    const GEMINI_KEY = 'AIzaSyAAgGrG1hWs4xYfAwvRDX2AkjlCPOMnqXw';
+    const GEMINI_KEY = '';
     const GEMINI_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
 
     let history = [];
